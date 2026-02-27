@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Comprehensive plan to upgrade Project Monolith to v5.5 'Immortal'. Key focus on making agents active rather than advisory, implementing system hygiene, and hardening the orchestrator.",
+  "updatedAt": "2026-02-04T21:20:29.535438400Z"
+}

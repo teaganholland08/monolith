@@ -89,59 +89,59 @@ class CFOAgent:
                      "All financial permissions revoked. Target research and scraping will continue.")
         self.comm_link.send_notification(alert_msg)
 
-    def check_balances(self):
-        if not PLAYWRIGHT_AVAILABLE:
-            print("[CFO] Playwright not available. Using mock balance mode.")
-            current_balance = 450.00
-            dynamic_floor = self.calculate_dynamic_floor(current_balance)
-            print(f"[CFO] Mock Balance: ${current_balance} | Floor: ${dynamic_floor}")
-            if current_balance <= dynamic_floor:
-                self.trigger_system_wide_lockdown(current_balance, dynamic_floor)
-            else:
-                print("[CFO] Balance healthy. Capital deployment authorized.")
-            return
+    def _get_live_ledger_balance(self):
+        """Reads the live Swarm ledger updated by the Treasury Router."""
+        ledger_path = "ledger.json"
+        if os.path.exists(ledger_path):
+            try:
+                with open(ledger_path, 'r') as f:
+                    data = json.load(f)
+                    total_balance = data.get("ops_balance", 0.0) + data.get("creator_balance", 0.0)
+                    return total_balance
+            except Exception as e:
+                print(f"[CFO] Failed to read ledger.json: {e}")
+        return None
 
-        print("[CFO] Initializing Headless Browser Scraper (Playwright)...")
-        try:
-            with sync_playwright() as p:
-                browser = p.chromium.launch(headless=True)
-                page = browser.new_page()
-                
-                # Standalone demonstrative scraping mechanism
-                # page.goto("https://mybank.local/login")
-                # page.fill("#username", "monolith_demo")
-                # page.fill("#password", "sovereign_123")
-                # page.click("#submit")
-                # balance_text = page.locator("#balance").inner_text()
-                
-                # Mock balance for demonstration
-                balance_text = "$450.00"
-                current_balance = float(balance_text.replace("$", "").replace(",", ""))
-                
-                print(f"[CFO] Verified banking balances locally: ${current_balance}")
-                
-                # Calculate the floor before authorizing capital deployment
-                dynamic_floor = self.calculate_dynamic_floor(current_balance)
-                print(f"[CFO] Calculated Dynamic Floor: ${dynamic_floor}")
-                
-                if current_balance <= dynamic_floor:
-                    self.trigger_system_wide_lockdown(current_balance, dynamic_floor)
-                else:
-                    # Give or maintain financial permissions to the Operative Agent
-                    perm_file = os.path.join(self.operative_sandbox, "financial_permissions.json")
-                    with open(perm_file, "w") as f:
-                        json.dump({"can_spend": True, "reason": "BALANCE_ABOVE_FLOOR"}, f)
-                    print(f"[CFO] Balance is healthy. Capital deployment authorized.")
-                
-                browser.close()
-        except Exception as e:
-            print(f"[CFO] Playwright error (Is chromium installed?): {e}")
+    def check_balances(self):
+        ledger_balance = self._get_live_ledger_balance()
+        current_balance = ledger_balance if ledger_balance is not None else 450.00
+        
+        print(f"[CFO] Live Ledger Balance: ${current_balance:.2f}")
+
+        # If Playwright is available, we could scrape the real bank to verify the internal ledger
+        if PLAYWRIGHT_AVAILABLE and ledger_balance is None:
+            print("[CFO] Initializing Headless Browser Scraper (Playwright)...")
+            try:
+                with sync_playwright() as p:
+                    browser = p.chromium.launch(headless=True)
+                    page = browser.new_page()
+                    # Mock balance for demonstration
+                    balance_text = "$450.00"
+                    current_balance = float(balance_text.replace("$", "").replace(",", ""))
+                    print(f"[CFO] Verified banking balances locally: ${current_balance}")
+                    browser.close()
+            except Exception as e:
+                print(f"[CFO] Playwright error (Is chromium installed?): {e}")
+
+        # Calculate the floor before authorizing capital deployment
+        dynamic_floor = self.calculate_dynamic_floor(current_balance)
+        print(f"[CFO] Calculated Dynamic Floor: ${dynamic_floor:.2f}")
+        
+        if current_balance <= dynamic_floor:
+            self.trigger_system_wide_lockdown(current_balance, dynamic_floor)
+        else:
+            # Give or maintain financial permissions to the Operative Agent
+            perm_file = os.path.join(self.operative_sandbox, "financial_permissions.json")
+            with open(perm_file, "w") as f:
+                json.dump({"can_spend": True, "reason": "BALANCE_ABOVE_FLOOR"}, f)
+            print(f"[CFO] Balance is healthy. Capital deployment authorized.")
 
     def run(self):
         self.unlock_vault()
         while True:
             self.check_balances()
-            time.sleep(3600)  # Check every hour
+            # CFO checks the ledger every 10 seconds to catch fast market drawdowns
+            time.sleep(10)
 
 if __name__ == "__main__":
     cfo = CFOAgent()

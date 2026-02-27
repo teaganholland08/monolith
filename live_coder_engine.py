@@ -111,6 +111,45 @@ class LiveCoderEngine:
             print(f"[VERSE PROTOCOL] 🩹 Self-Healing Failed: {e}")
             return None
 
+    def optimize_trading_logic(self, target_file_name: str, win_rate: float, current_code: str, model="qwen2.5:0.5b"):
+        """
+        The Monolith's evolutionary mechanism. If a trading algorithm drops below a threshold win rate,
+        this asks the local AI to identify flaws and rewrite the logic for higher Expected Value (+EV).
+        """
+        print(f"[VERSE PROTOCOL] 🧠 Evolving algorithm '{target_file_name}' (Current Win Rate: {win_rate*100:.1f}%)")
+        
+        prompt = (
+            "You are the quantitative trading brain of Project Monolith.\n"
+            f"The following Python algorithm is currently achieving a {win_rate*100:.1f}% win rate, which is suboptimal.\n\n"
+            f"Current Code:\n```python\n{current_code}\n```\n\n"
+            "Rewrite this algorithm to drastically improve its profitability, risk management, "
+            "and execution speed. Maintain the exact same class and function signatures so it can be hot-reloaded. "
+            "Respond ONLY with the complete, raw, optimized python code. No markdown, no explanations."
+        )
+        
+        try:
+            import urllib.request
+            import json
+            
+            api_url = "http://127.0.0.1:11434/api/generate"
+            data = {"model": model, "prompt": prompt, "stream": False}
+            req = urllib.request.Request(api_url, data=json.dumps(data).encode('utf-8'), headers={'Content-Type': 'application/json'})
+            
+            with urllib.request.urlopen(req) as response:
+                optimized_code = json.loads(response.read().decode('utf-8')).get("response", "")
+                
+                import re
+                optimized_code = re.sub(r'```python|```', '', optimized_code).strip()
+                
+                # Write and hot-reload the evolved code
+                self.write_and_load_python(target_file_name, optimized_code)
+                print(f"[VERSE PROTOCOL] ✨ Algorithm '{target_file_name}' successfully evolved and hot-reloaded.")
+                return True
+                
+        except Exception as e:
+            print(f"[VERSE PROTOCOL] ☠️ Algorithmic evolution failed for {target_file_name}: {e}")
+            return False
+
 if __name__ == "__main__":
     # Internal Test
     coder = LiveCoderEngine()

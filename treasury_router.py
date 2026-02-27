@@ -66,6 +66,28 @@ class TreasuryRouter:
         self._save_ledger()
         self.print_ledgers()
 
+    def process_drawdown(self, amount: float):
+        """Deducts trading losses. Drains the ops wallet first, then the creator dividend."""
+        logger.warning(f"Processing drawdown event: -${amount:.2f}")
+        
+        if self.operations_wallet_balance >= amount:
+            self.operations_wallet_balance -= amount
+            logger.warning(f"Ops Wallet absorbed the entire loss (${amount:.2f}).")
+        else:
+            remaining_loss = amount - self.operations_wallet_balance
+            logger.warning(f"Ops Wallet wiped out (Deducted ${self.operations_wallet_balance:.2f}).")
+            self.operations_wallet_balance = 0.0
+            
+            if self.creator_dividend_balance >= remaining_loss:
+                self.creator_dividend_balance -= remaining_loss
+                logger.warning(f"Remaining loss (${remaining_loss:.2f}) deducted from Creator Dividend.")
+            else:
+                logger.critical(f"CATASTROPHIC LOSS: Entire treasury wiped. Deficit: -${remaining_loss - self.creator_dividend_balance:.2f}")
+                self.creator_dividend_balance = 0.0
+                
+        self._save_ledger()
+        self.print_ledgers()
+
     def print_ledgers(self):
         """Prints current internal balances."""
         logger.info(f"--- LEDGER UPDATE ---")

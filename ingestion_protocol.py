@@ -87,6 +87,60 @@ class DataMiner:
             self.process_inbox()
             time.sleep(3600)  # Check every hour
 
+
+import requests
+import threading
+
+class LiveMarketIngester:
+    """Pulls real-time financial market data into the Swarm's inbox."""
+    def __init__(self):
+        self.inbox = "./data/inbox/"
+        self.endpoints = [
+            # Binance public API (no key needed for simple public tickers)
+            "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT",
+            "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT",
+            "https://api.binance.com/api/v3/ticker/price?symbol=SOLUSDT"
+        ]
+
+    def fetch_market_data(self):
+        print("[LiveMarketIngester] Fetching real-time market data...")
+        for url in self.endpoints:
+            try:
+                response = requests.get(url, timeout=5)
+                if response.status_code == 200:
+                    data = response.json()
+                    symbol = data.get("symbol", "UNKNOWN")
+                    price = data.get("price", "0")
+                    
+                    filename = f"market_data_{symbol}_{int(time.time())}.txt"
+                    filepath = os.path.join(self.inbox, filename)
+                    
+                    # Create a structured text file for DataMiner to ingest into memory
+                    content = f"MARKET DATA: {symbol} is currently priced at ${price} USDT."
+                    with open(filepath, "w", encoding="utf-8") as f:
+                        f.write(content)
+                        
+            except Exception as e:
+                print(f"[LiveMarketIngester] Failed to fetch {url}: {e}")
+
+    def run(self):
+        while True:
+            self.fetch_market_data()
+            time.sleep(30) # Fetch every 30 seconds
+
 if __name__ == "__main__":
     miner = DataMiner()
-    miner.run()
+    market_ingester = LiveMarketIngester()
+    
+    # Run both on separate threads
+    miner_thread = threading.Thread(target=miner.run, daemon=True)
+    market_thread = threading.Thread(target=market_ingester.run, daemon=True)
+    
+    miner_thread.start()
+    market_thread.start()
+    
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Ingestion Protocol shut down.")
