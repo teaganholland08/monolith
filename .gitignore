@@ -28,6 +28,13 @@ ENV/
 Monolith_v4.5_Immortal*/
 Monolith_Archive/
 
+# --- Live Streaming / Telemetry Logs (written continuously by agents) ---
+agent_telemetry.json
+biological_telemetry.json
+*.jsonl
+monolith_memory.json
+archetypes.json
+
 # --- Databases & Persistent State ---
 *.db
 *.sqlite
