@@ -1,0 +1,36 @@
+{
+    "git.ignoreLimitWarning": true,
+    "git.untrackedChanges": "hidden",
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/Monolith_v4.5_Immortal_COMPLETE_*/**": true,
+        "**/Monolith_v4.5_Immortal/**": true,
+        "**/Monolith_Archive/**": true,
+        "**/To_Merge/**": true,
+        "**/__pycache__/**": true,
+        "**/.venv/**": true,
+        "**/nuclei/**": true,
+        "**/data/**": true,
+        "**/Memory/**": true,
+        "**/Sentinels/**": true,
+        "**/Logs/**": true,
+        "**/.snapshots/**": true
+    },
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.venv": true,
+        "**/Monolith_v4.5_Immortal_COMPLETE_*": true,
+        "**/Monolith_Archive": true,
+        "**/nuclei": true,
+        "**/*.db": true,
+        "**/*.zip": true
+    },
+    "search.exclude": {
+        "**/Monolith_v4.5_Immortal_COMPLETE_*": true,
+        "**/To_Merge": true,
+        "**/.venv": true,
+        "**/nuclei": true,
+        "**/node_modules": true
+    }
+}
