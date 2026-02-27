@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Master Implementation Plan for Monolith World-Complete Edition.\nPhase 1: Architecture Definition.\nPhase 2: Operator Intelligence Hardening.\nPhase 3: Sentinel & Identity Integration.\nFocuses on removing mocks, hardening the boot sequence, and enforcing sovereign logic.",
-  "updatedAt": "2026-02-06T03:49:43.066234300Z"
-}

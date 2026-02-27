@@ -1,11 +1,12 @@
 {
     "git.ignoreLimitWarning": true,
     "git.untrackedChanges": "hidden",
+    "git.countBadge": "tracked",
+    "git.decorations.enabled": false,
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
-        "**/Monolith_v4.5_Immortal_COMPLETE_*/**": true,
-        "**/Monolith_v4.5_Immortal/**": true,
+        "**/Monolith_v4.5_Immortal*/**": true,
         "**/Monolith_Archive/**": true,
         "**/To_Merge/**": true,
         "**/__pycache__/**": true,
@@ -15,22 +16,28 @@
         "**/Memory/**": true,
         "**/Sentinels/**": true,
         "**/Logs/**": true,
-        "**/.snapshots/**": true
+        "**/.snapshots/**": true,
+        "**/assets/**": true
     },
     "files.exclude": {
         "**/__pycache__": true,
         "**/.venv": true,
-        "**/Monolith_v4.5_Immortal_COMPLETE_*": true,
+        "**/Monolith_v4.5_Immortal*": true,
         "**/Monolith_Archive": true,
+        "**/To_Merge": true,
         "**/nuclei": true,
         "**/*.db": true,
-        "**/*.zip": true
+        "**/*.zip": true,
+        "**/data": true,
+        "**/Memory": true,
+        "**/Sentinels": true,
+        "**/Logs": true,
+        "**/.snapshots": true
     },
     "search.exclude": {
-        "**/Monolith_v4.5_Immortal_COMPLETE_*": true,
+        "**/Monolith_v4.5_Immortal*": true,
         "**/To_Merge": true,
         "**/.venv": true,
-        "**/nuclei": true,
-        "**/node_modules": true
+        "**/nuclei": true
     }
 }

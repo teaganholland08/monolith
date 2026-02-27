@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plan to purge simulation code and activate real revenue tracking. Includes refactoring `monolith_sentinel.py`, `hydra.py`, and `subsidy_hunter.py`.",
-  "updatedAt": "2026-02-05T09:50:54.716847Z"
-}

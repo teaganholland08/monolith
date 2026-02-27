@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Comprehensive walkthrough documenting the Project Monolith v5.5 audit. Covers: full system verification (55 agents, 10 core layers, 33 revenue streams), bug fixes for Windows unicode encoding, test results (3/3 safety tests pass), and revenue engine execution results. Includes proof of work screenshots and next steps for the user.",
-  "updatedAt": "2026-02-04T21:26:40.641199600Z"
-}

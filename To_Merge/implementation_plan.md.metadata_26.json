@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plan to deploy Project Monolith using a PowerShell installer script. This includes creating the script file with the user's provided code and executing it to set up the environment.",
-  "updatedAt": "2026-02-03T23:28:13.657204600Z"
-}

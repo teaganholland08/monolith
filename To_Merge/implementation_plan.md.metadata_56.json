@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plan to unify Monolith into a single master orchestrator, enhance the Sentinel layer, and implement missing core components (Scheduler, Sandbox, API). Focuses on establishing the 'Master Instruction Set' architecture.",
-  "updatedAt": "2026-02-05T10:40:46.449433200Z"
-}

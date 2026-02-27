@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plan to upgrade Project Monolith from 'Simulation' to 'Real Revenue' mode by implementing real API integrations for micro-tasks, hardening the Sentinel agent, and deploying a 'Best in World' real-time dashboard.",
-  "updatedAt": "2026-02-05T04:17:07.752256800Z"
-}

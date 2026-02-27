@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plan to transition Project Monolith from 'Mock/Simulation' to 'Real Execution' by replacing random number generators with real ledger tracking, implementing dynamic web scraping for revenue opportunities, and fixing the Monolith Prime bootstrap logic.",
-  "updatedAt": "2026-02-04T22:21:42.861303300Z"
-}
