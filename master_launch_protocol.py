@@ -31,6 +31,8 @@ AGENTS = [
     {"name": "Sovereign Logic", "path": ROOT / "sovereign_logic.py", "priority": "HIGH"},
     {"name": "Prometheus Loop", "path": ROOT / "prometheus_loop.py", "priority": "HIGH"},
     {"name": "Profit Engine", "path": ROOT / "profit_engine.py", "priority": "HIGH"},
+    {"name": "Data Ingestion", "path": ROOT / "ingestion_protocol.py", "priority": "HIGH"},
+    {"name": "CFO Agent", "path": ROOT / "cfo_agent.py", "priority": "HIGH"},
     {"name": "Infra Scaler", "path": ROOT / "infrastructure_scaler.py", "priority": "MED"},
     {"name": "Comm Link", "path": ROOT / "comm_link.py", "priority": "MED"},
 ]
