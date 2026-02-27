@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Upgrade Monolith to v6.0 'Sovereign'. Replace simulated revenue engines with real asset generation and trend scanning.\n1. Upgrade Creative Engine to use generate_image for real asset creation.\n2. Upgrade Revenue Scanner to use search_web for live trend analysis.\n3. Upgrade Growth Engine to track real file-based ledger.\n4. Add 'Executor' layer for browser automation fundamentals.",
+  "updatedAt": "2026-02-04T21:18:05.939489Z"
+}

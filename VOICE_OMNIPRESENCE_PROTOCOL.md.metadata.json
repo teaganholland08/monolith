@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Formal definition of the Monolith Voice & Omnipresence Layer.\nCaptures the strategy for 'Invisible Presence' using local voice satellites (ESP32-S3), Home Assistant Hub, and the 'Super-Connector' bridge between the Wealth Brain and House Brain.",
+  "updatedAt": "2026-02-04T05:05:29.687753Z"
+}

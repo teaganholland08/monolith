@@ -1,0 +1,105 @@
+# ===================================================
+# PROJECT MONOLITH - .gitignore
+# Track only source code. Exclude all data/state.
+# ===================================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+
+# --- Large Archive Files (NEVER commit these) ---
+*.zip
+*.tar.gz
+*.tar
+*.7z
+*.rar
+Monolith_v4.5_Immortal*/
+Monolith_Archive/
+
+# --- Databases & Persistent State ---
+*.db
+*.sqlite
+*.sqlite3
+ledger.json
+sovereign_state.json
+financial_ledger.json
+ionet_config.json
+agent_telemetry.json
+biological_telemetry.json
+monolith_memory.json
+monolith_rules.json.migrated
+slips_2025.json
+ip_assets.json
+manifest.json
+operator_manifest.json
+system_manifest.json
+governance_policy.json
+governance_constitution.json
+
+# --- Logs & Runtime Output ---
+Logs/
+*.log
+output.txt
+diagnostic_report.txt
+diff_report.txt
+integrity_check.md
+AGENT_ACTIVITY_LOG.md
+COMMANDER_DAILY_LOG.md
+write_file.txt
+*.done
+transactions.db
+ledger.db
+
+# --- Generated/Mutant Agent Code ---
+mutant_*.py
+scout_agent.py
+
+# --- Data Directories ---
+data/
+Memory/
+.snapshots/
+Sentinels/
+assets/
+
+# --- Sensitive / Credentials ---
+.env
+.env_vault
+*.key
+*.pem
+*.cert
+constitution.txt
+
+# --- IDE & OS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+~$*
+Thumbs.db
+desktop.ini
+.DS_Store
+*.search-ms
+
+# --- Nuclei Tool (binary, not code) ---
+nuclei/
+nuclei.zip
+
+# --- Huge text backups ---
+MONOLITH_EVERYTHING_BACKUP.txt
+MONOLITH_SOURCE_CODE.txt
+archetypes.json
+monolith_memory.json
+diff_report.txt
+tech_write_offs.json

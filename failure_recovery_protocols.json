@@ -1,0 +1,46 @@
+{
+    "failure_protocols_version": "1.0",
+    "default_response": "SURVIVE_AND_RETRY",
+    "scenarios": {
+        "NETWORK_DOWN": {
+            "severity": "CRITICAL",
+            "action": "ENTER_SLEEP_OYCLE",
+            "retry_interval_seconds": 60,
+            "max_retries": 1440,
+            "fallback": "LOCAL_MAINTENANCE_ONLY"
+        },
+        "ZERO_FUNDS_DETECTED": {
+            "severity": "HIGH",
+            "action": "ACTIVATE_TIER1_STREAMS",
+            "target_agents": [
+                "micro_task_executor",
+                "digital_product_uploader"
+            ],
+            "spending_lock": "TRUE",
+            "alert": "OPERATOR_WAKEUP"
+        },
+        "IDENTITY_LOCKOUT": {
+            "severity": "FATAL",
+            "action": "EMERGENCY_LOCKDOWN",
+            "encryption_lock": "TRUE",
+            "kill_switch_armed": "TRUE"
+        },
+        "API_BAN_DETECTED": {
+            "severity": "MEDIUM",
+            "action": "ROTATE_IP_AND_AGENT",
+            "blacklist_provider": "TRUE"
+        },
+        "INFINITE_LOOP_DETECTED": {
+            "severity": "HIGH",
+            "action": "FORCE_KILL_PROCESS",
+            "target": "offending_agent",
+            "report_to": "monolith_sentinel"
+        }
+    },
+    "recovery_triggers": {
+        "auto_restart": true,
+        "self_healing_scripts": [
+            "System/Scripts/repair_registry.py"
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "scout_agent.py": {
+    "id": "3ec73245-76e9-4532-9b4a-242f90ad8548",
+    "role": "CORE_WORKER",
+    "created_at": "2026-02-26T16:34:51.829956",
+    "path": "System\\Agents\\Active\\scout_agent.py",
+    "status": "ACTIVE"
+  },
+  "treasurer_agent.py": {
+    "id": "65184ee3-c397-41e8-88a5-fa635b3b68aa",
+    "role": "CORE_WORKER",
+    "created_at": "2026-02-26T16:34:51.878630",
+    "path": "System\\Agents\\Active\\treasurer_agent.py",
+    "status": "ACTIVE"
+  }
+}

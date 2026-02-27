@@ -1,0 +1,9 @@
+{
+    "authorized_kill_codes": [
+        "OMEGA_PULL",
+        "TERMINATE_PINNACLE"
+    ],
+    "emergency_fiat_routing_account": "ACH-PENDING-ARCHITECT-INPUT",
+    "emergency_crypto_cold_wallet": "COLD-WALLET-PENDING-ARCHITECT-INPUT",
+    "liquidation_mode": "IMMEDIATE"
+}

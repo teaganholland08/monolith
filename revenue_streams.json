@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Crypto_Arbitrage_X",
+        "type": "arbitrage",
+        "expected_roi": 1.5,
+        "risk_level": "medium",
+        "endpoint": "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
+    },
+    {
+        "name": "Content_Generation_Y",
+        "type": "content",
+        "expected_roi": 0.8,
+        "risk_level": "low",
+        "endpoint": "https://www.reddit.com/r/technology/top.json?limit=5"
+    },
+    {
+        "name": "API_Brokerage_Z",
+        "type": "brokerage",
+        "expected_roi": 2.1,
+        "risk_level": "high",
+        "endpoint": "https://api.coingecko.com/api/v3/ping"
+    }
+]

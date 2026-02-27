@@ -1,0 +1,6 @@
+{
+  "System/Agents/micro_task_executor.py": "8eb3ae0658d3c3969ed00b0cde06b37f6bd65fae805cc069af9df315c6659e3b",
+  "System/Core/revenue_orchestrator.py": "b3f5c21e020a5953c1baa088aa4a566abfe7c7f0af0876293037a6826cead61d",
+  "System/Config/financial_policy.json": "MISSING",
+  "monolith_dashboard.py": "c8c780b7760ff43252b20a3a302636a335f626fb4094bfe2c51c826ef39e85f0"
+}

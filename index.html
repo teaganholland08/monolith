@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monolith Starship Command Deck</title>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #00ffcc;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .metric-title {
+            font-size: 0.9em;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        #killSwitch {
+            background-color: transparent;
+            color: #ff3333;
+            border: 2px solid #ff3333;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+        }
+
+        #killSwitch:hover {
+            background-color: #ff3333;
+            color: #0b0f19;
+            box-shadow: 0 0 30px #ff3333;
+        }
+
+        .status-online {
+            color: #00ffcc;
+            text-shadow: 0 0 5px #00ffcc;
+        }
+
+        .status-offline {
+            color: #ff3333;
+            text-shadow: 0 0 5px #ff3333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Project Monolith // Command Deck</h1>
+
+    <div class="dashboard">
+        <div class="metric-card">
+            <div class="metric-title">System Status</div>
+            <div class="metric-value" id="sys-status">LOADING</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Active Agents</div>
+            <div class="metric-value" id="active-agents">0</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Total Revenue</div>
+            <div class="metric-value">$<span id="revenue">0.00</span></div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-title">Hardware Draw</div>
+            <div class="metric-value"><span id="wattage">0.0</span> W</div>
+        </div>
+    </div>
+
+    <button id="killSwitch">Engage Kill Switch</button>
+
+    <script>
+        async function fetchTelemetry() {
+            try {
+                const response = await fetch('/telemetry');
+                const data = await response.json();
+
+                const statusEl = document.getElementById('sys-status');
+                statusEl.innerText = data.system_status;
+                if (data.system_status === 'ONLINE') {
+                    statusEl.className = 'metric-value status-online';
+                } else {
+                    statusEl.className = 'metric-value status-offline';
+                }
+
+                document.getElementById('active-agents').innerText = data.active_agents;
+                document.getElementById('revenue').innerText = data.revenue_generated.toFixed(2);
+                document.getElementById('wattage').innerText = data.current_wattage.toFixed(1);
+            } catch (error) {
+                console.error("Link to swarm severed.", error);
+                document.getElementById('sys-status').innerText = "DISCONNECTED";
+                document.getElementById('sys-status').className = 'metric-value status-offline';
+            }
+        }
+
+        document.getElementById('killSwitch').addEventListener('click', async () => {
+            if (confirm('WARNING: Are you sure you want to terminate the Swarm?')) {
+                try {
+                    await fetch('/kill_switch');
+                    alert("Swarm Kill Signal Authorized and Sent.");
+                } catch (e) {
+                    alert("Failed to send Kill Signal. System may already be down.");
+                }
+            }
+        });
+
+        // Update telemetry every 2 seconds
+        setInterval(fetchTelemetry, 2000);
+        fetchTelemetry(); // initial fetch
+    </script>
+</body>
+
+</html>
